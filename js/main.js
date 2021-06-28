@@ -51,6 +51,8 @@ $(document).ready(function () {
         if ($(".header__inner").hasClass("active")) {
             $(".header__inner").removeClass("active");
             $(".header__burger").removeClass("active");
+
+            $(".wrapper").toggleClass("hidden");
         }
     });
 });
