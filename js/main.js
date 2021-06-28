@@ -52,7 +52,7 @@ $(document).ready(function () {
             $(".header__inner").removeClass("active");
             $(".header__burger").removeClass("active");
 
-            $(".wrapper").toggleClass("hidden");
+            $(".wrapper").removeClass("hidden");
         }
     });
 });
