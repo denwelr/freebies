@@ -26,17 +26,29 @@ $(document).ready(function () {
         ]
     });
 
-    /*window.onresize = function () {
+    if (screen.width < 584) {
+        $(".footer__list").addClass("footer__list_spoiler");
+    }
+    else {
+        $(".footer__list").removeClass("footer__list_spoiler");
+    }
+
+    $(".footer__title").click(function () {
         if (screen.width < 584) {
-            $(".footer__list").find("ul").slideDown();
+            $(this).toggleClass("footer__title_open");
+            $(this).siblings("ul").slideToggle();
+        }  
+    });
+
+    window.onscroll = function () {
+        var sticky = $(document).scrollTop();
+
+        if (sticky > 50) {
+            $(".header").addClass("sticky");
+        } else {
+            $(".header").removeClass("sticky");
         }
     };
-
-    $(".footer__list").click(function () {
-        if (screen.width < 584) {
-            $(".footer__list").find("ul").slideToggle();
-        }
-    });*/
 
     $(".header__burger").click(function (e) {
         e.preventDefault();

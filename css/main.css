@@ -1,9 +1,3 @@
-@charset "UTF-8";
-/* 
-    1. Сделать обертку для nav и btns и поместить их в бургер
-    2. Допилить адаптив header
-    3. Сделать фикс header при скролле
-*/
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -110,7 +104,8 @@ ul {
   line-height: 18px;
   border: 1px solid #f53855;
   padding: 13px 45px;
-  min-width: 155px;
+  min-width: 55px;
+  text-align: center;
   border-radius: 50px;
   -webkit-transition: 300ms ease 0s;
   transition: 300ms ease 0s;
@@ -213,6 +208,29 @@ ul {
   }
 }
 
+.header.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 15px;
+  -webkit-transition: 800ms;
+  transition: 800ms;
+}
+
+.header.sticky .header__nav ul li {
+  -webkit-transition: all 300ms;
+  transition: all 300ms;
+  margin-right: 10px;
+}
+
+.header.sticky .header__btn {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
 .header {
   padding-top: 50px;
   display: -webkit-box;
@@ -262,6 +280,7 @@ ul {
 
 .header__burger {
   display: none;
+  cursor: pointer;
   width: 35px;
   height: 34px;
   position: relative;
@@ -284,7 +303,7 @@ ul {
   top: 50%;
   right: 0;
   margin-top: -1.5px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #f53855;
 }
 
 .header__burger:before, .header__burger:after {
@@ -294,15 +313,19 @@ ul {
   transition: all 300ms ease 0s;
   width: 34px;
   height: 3px;
-  background-color: rgba(0, 0, 0, 0.7);
+  top: 50%;
+  margin-top: -1.5px;
+  background-color: #f53855;
 }
 
 .header__burger:before {
-  top: 0;
+  -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
 }
 
 .header__burger:after {
-  bottom: 0;
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
 }
 
 .header__burger.active > span {
@@ -343,17 +366,14 @@ ul {
     -webkit-transition: all 400ms ease 0s;
     transition: all 400ms ease 0s;
     position: fixed;
-    z-index: 100;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
     top: 0;
     right: -200%;
+    z-index: 100;
+    width: 100%;
     height: 100%;
-    width: 80%;
-    min-width: 320px;
     margin: 0;
     padding: 50px 30px;
-    background-color: black;
+    background-color: #000;
     overflow-y: auto;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -365,6 +385,8 @@ ul {
     -webkit-box-align: start;
         -ms-flex-align: start;
             align-items: flex-start;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
   }
   .header__inner .header__nav {
     margin: 0;
@@ -403,7 +425,7 @@ ul {
       flex-wrap: wrap;
 }
 
-.header__nav ul li:not(:last-child) a {
+.header__nav ul li:not(:last-child) {
   margin-right: 40px;
 }
 
@@ -523,11 +545,6 @@ ul {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    /*$__bg {
-                margin-right: 0;
-
-                margin-bottom: 130px;
-            }*/
   }
 }
 
@@ -1081,6 +1098,9 @@ ul {
         -ms-flex-direction: column;
             flex-direction: column;
   }
+  .footer__body .footer__navs .footer__list {
+    margin: 0;
+  }
 }
 
 .footer__navs {
@@ -1111,12 +1131,6 @@ ul {
   font-weight: bold;
 }
 
-@media screen and (max-width: 584px) {
-  .footer__list ul li {
-    display: none;
-  }
-}
-
 .footer__list:not(:last-child) {
   margin-right: 120px;
 }
@@ -1132,4 +1146,50 @@ ul {
 .footer__title {
   font-weight: 500;
   margin-bottom: 20px;
+  position: relative;
+}
+
+.footer__title.footer__title_open span:before {
+  -webkit-transform: rotate(40deg);
+          transform: rotate(40deg);
+}
+
+.footer__title.footer__title_open span:after {
+  -webkit-transform: rotate(40deg);
+          transform: rotate(40deg);
+}
+
+.footer__list.footer__list_spoiler ul {
+  display: none;
+}
+
+.footer__list.footer__list_spoiler .footer__title span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.footer__list.footer__list_spoiler .footer__title span:before {
+  content: '';
+  position: absolute;
+  top: calc(50% - 2px);
+  width: 100%;
+  height: 4px;
+  background-color: #000;
+  -webkit-transition: 400ms;
+  transition: 400ms;
+}
+
+.footer__list.footer__list_spoiler .footer__title span:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 4px;
+  top: 0;
+  left: calc(50% - 2px);
+  background-color: #000;
+  -webkit-transition: 400ms;
+  transition: 400ms;
 }

@@ -2,14 +2,8 @@
 $bg: #f6f6f6;
 $bg2: #f8f8f8;
 
-///////////////////
 $containerWidth: 1206px;
 
-/* 
-    1. Сделать обертку для nav и btns и поместить их в бургер
-    2. Допилить адаптив header
-    3. Сделать фикс header при скролле
-*/
 * {
     box-sizing: border-box;
 }
@@ -114,7 +108,8 @@ ul {
 
     border: 1px solid #f53855;
     padding: 13px 45px;
-    min-width: 155px;
+    min-width: 55px;
+    text-align: center;
 
     border-radius: 50px;
     transition: 300ms ease 0s;
@@ -217,9 +212,32 @@ ul {
     }
 }
 
+.header.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    z-index: 99;
+
+    background-color: rgba(255, 255, 255, .95);
+
+    padding: 15px;
+
+    transition: 800ms;
+
+    .header__nav ul li{
+        transition: all 300ms;
+        margin-right: 10px;
+    }
+    .header__btn {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+}
+
 .header {
     padding-top: 50px;
-
     display: flex;
 
     justify-content: space-between;
@@ -253,9 +271,13 @@ ul {
 
     &__burger {
         display: none;
+        cursor: pointer;
+
         @media screen and (max-width: 606px) {
             display: block;
         }
+
+        $burger-color: #f53855;
 
         width: 35px;
         height: 34px;
@@ -277,7 +299,7 @@ ul {
 
             margin-top: -1.5px;
 
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: $burger-color;
         }
         &:before,
         &:after {
@@ -289,13 +311,16 @@ ul {
             width: 34px;
             height: 3px;
 
-            background-color: rgba(0, 0, 0, 0.7);
+            top: 50%;
+            margin-top: -1.5px;
+
+            background-color: $burger-color;
         }
         &:before {
-            top: 0;
+            transform: translateY(-10px);
         }
         &:after {
-            bottom: 0;
+            transform: translateY(10px);
         }
     }
     &__burger.active > span {
@@ -328,26 +353,23 @@ ul {
             transition: all 400ms ease 0s;
 
             position: fixed;
-            z-index: 100;
-
-            flex-wrap: nowrap;
-
             top: 0;
             right: -200%;
+            z-index: 100;
 
+            width: 100%;
             height: 100%;
-            width: 80%;
-            min-width: 320px;
 
             margin: 0;
             padding: 50px 30px;
 
-            background-color: rgba(0, 0, 0, 1);
+            background-color: #000;
             overflow-y: auto;
 
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            flex-wrap: nowrap;
 
             .header__nav {
                 margin: 0;
@@ -386,9 +408,7 @@ ul {
             flex-wrap: wrap;
 
             li:not(:last-child) {
-                a {
-                    margin-right: 40px;
-                }
+                margin-right: 40px;
             }
             @media screen and (any-hover: hover) {
                 li a:hover {
@@ -477,12 +497,6 @@ ul {
 
         @media screen and (max-width: 650px) {
             flex-direction: column;
-
-            /*$__bg {
-                margin-right: 0;
-
-                margin-bottom: 130px;
-            }*/
         }
     }
 
@@ -982,6 +996,10 @@ ul {
         @media screen and (max-width: 564px) {
             .footer__navs {
                 flex-direction: column;
+
+                .footer__list {
+                    margin: 0;
+                }
             }
         }
     }
@@ -1032,5 +1050,56 @@ ul {
     &__title {
         font-weight: 500;
         margin-bottom: 20px;
+        position: relative;
+    }
+}
+.footer__title.footer__title_open {
+    span {
+        &:before {
+            transform: rotate(40deg);
+        }
+        &:after {
+            transform: rotate(40deg);
+        }
+    }
+}
+.footer__list.footer__list_spoiler {
+    ul {
+        display: none;
+    }
+    .footer__title {
+        span{
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            width: 20px;
+            height: 20px;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: calc(50% - 2px);
+
+                width: 100%;
+                height: 4px;
+
+                background-color: #000;
+                transition: 400ms;
+            }
+            &:after {
+                content: '';
+                position: absolute;
+
+                height: 100%;
+                width: 4px;
+
+                top: 0;
+                left: calc(50% - 2px);
+
+                background-color: #000;
+                transition: 400ms;
+            }
+        }
     }
 }
